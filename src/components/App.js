@@ -61,7 +61,6 @@ class App extends React.Component {
     const profile = await auth.profile()
     console.log(profile)
     if (profile.status === 401) {
-      console.log(profile.message)
       alert('Username already exists!')
     } else {
       this.setState({ currentUserId: profile.user._id })
