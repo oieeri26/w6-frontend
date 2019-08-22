@@ -44,6 +44,7 @@ class App extends React.Component {
     const profile = await auth.profile()
     if (profile.status === 401) {
       alert('Username or password is incorrect!')
+      this.setState({ showAlert: true })
     } else {
       this.setState({ currentUserId: profile.user._id })
     } 
@@ -62,6 +63,7 @@ class App extends React.Component {
     console.log(profile)
     if (profile.status === 401) {
       alert('Username already exists!')
+      this.setState({ showAlert: true })
     } else {
       this.setState({ currentUserId: profile.user._id })
     }
