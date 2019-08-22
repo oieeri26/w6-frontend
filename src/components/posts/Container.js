@@ -1,9 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router'
 import { Route } from 'react-router-dom'
-import { withRouter } from 'react-router'
-
-import * as api from '../../api/posts'
 
 // Helpers
 import * as posts from '../../api/posts'
@@ -33,22 +30,21 @@ class Container extends React.Component {
   }
   
   async destroyPost (post) {
-    if (post.content.length ===0) {
-      alert('Please include content in the content box!')
-    } else {
       const { currentUserId, history, refreshUsers } = this.props
       await posts.destroyPost({ user: { _id: currentUserId }, post })
       await refreshUsers()
       history.push(`/users/${currentUserId}/posts`)
-    }
   }
 
   async editPost (post) {
-    const { currentUserId, history, refreshUsers } = this.props
-    await posts.updatePost({ user: { _id: currentUserId }, post })
-    await refreshUsers()
-
-    history.push(`/users/${currentUserId}/posts`)
+    if (post.content.length ===0) {
+      alert('Please include content in the content box!')
+    } else {
+      const { currentUserId, history, refreshUsers } = this.props
+      await posts.updatePost({ user: { _id: currentUserId }, post })
+      await refreshUsers()
+      history.push(`/users/${currentUserId}/posts`)
+    }
   }
 
   render () {
